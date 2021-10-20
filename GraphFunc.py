@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+
 class treeNode:
     def __init__(self, data):
         self.children = []
@@ -10,7 +11,7 @@ class treeNode:
 
     def print_children(self):
         [print(x.data) for x in self.children]
-    
+
     def children_array(self):
         return [x.data for x in self.children]
 
@@ -40,7 +41,7 @@ def create_tree(graph, root, visit):
     auxNode = treeNode(root)
     visit.add(root)
     for dest in graph[root]:
-        if(dest not in visit):
+        if dest not in visit:
             auxNode.add_child(create_tree(graph, dest, visit.copy()))
     return auxNode
 
