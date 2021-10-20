@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 class treeNode:
     def __init__(self, data):
         self.children = []
@@ -54,7 +56,7 @@ def get_unique_dest(data):
 
 def create_graph(data, unique_data):
     # "Key": [Data,Data]
-    graph = {}
+    graph = OrderedDict()
     for start in unique_data:
         destinations = [row[DESTINO] for row in data if (row[ORIGEN] == start)]
         graph[start] = destinations

@@ -1,4 +1,4 @@
-from os import path
+
 
 
 def hi():
@@ -39,10 +39,35 @@ def get_path(root,destino):
 def get_path_util(root,destino,path_so_far):
     global paths
     path_so_far.append(root.data)
-    if(destino in root.children_array()):
-        path_so_far.append(destino)
-        paths.append(path_so_far)
-        return
-    else:
-        for child in root.children:
+
+    for child in root.children:
+        if(destino == child.data):
+            new_path_so_far = path_so_far.copy()
+            new_path_so_far.append(destino)
+            paths.append(new_path_so_far)
+        else:
             get_path_util(child,destino,path_so_far.copy())
+
+total_edges = 0
+def get_edges(root):
+    global total_edges
+    for child in root.children:
+        total_edges+=1
+        get_edges(child)
+    
+    return total_edges
+
+acyclic_nodes = 0
+def find_cycles(root):
+    global acyclic_nodes
+    acyclic_nodes += len(root.children_array()) - len(set(root.children_array()))
+
+    for child in root.children:
+        find_cycles(child)
+    return acyclic_nodes
+
+    
+
+
+
+
